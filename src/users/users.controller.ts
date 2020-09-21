@@ -1,4 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Body, Request, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UsersService } from './users.service';
+import { UseInterceptors } from '@nestjs/common';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 
-@Controller('users')
-export class UsersController {}
+@UseInterceptors(ClassSerializerInterceptor)
+@Controller('user')
+export class UsersController {
+    constructor(private readonly usersService: UsersService) {}
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/profile')
+    getProfile(@Request() req) {
+        return this.usersService.getByEmail(req.user.email);
+    }
+}

@@ -26,6 +26,7 @@ export class UsersService {
   async getByEmail(email: string) {
     const user = await this.usersRepository.findOne({ email });
     if (user) {
+      console.log(user)
       return user;
     }
     throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND);
