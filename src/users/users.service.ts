@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 
+const bcrypt = require('bcrypt');
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -13,6 +15,8 @@ export class UsersService {
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
+    user.email = createUserDto.email;
+    user.password = createUserDto.password;
     user.firstName = createUserDto.firstName;
     user.lastName = createUserDto.lastName;
 
