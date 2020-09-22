@@ -28,4 +28,9 @@ export class User {
     @Expose()
     @Column({ default: true })
     isActive: boolean;
+
+    @Expose()
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
 }

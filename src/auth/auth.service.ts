@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -13,9 +13,8 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.getByEmail(email)
+    const user = await this.usersService.getByEmailAndThrowIfDontExist(email)
     if (user && await bcrypt.compare(pass, user.password)) {
-      const { ...result } = user;
       return user;
     }
     return null;
@@ -29,6 +28,7 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
+    const user = this.usersService.getByEmailAndThrowIfExist(createUserDto.email)
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
     return await this.usersService.create(createUserDto)
   }

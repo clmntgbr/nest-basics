@@ -12,6 +12,6 @@ export class UsersController {
     @UseGuards(JwtAuthGuard)
     @Get('/profile')
     getProfile(@Request() req) {
-        return this.usersService.getByEmail(req.user.email);
+        return this.usersService.getByEmailAndThrowIfDontExist(req.user.email);
     }
 }
