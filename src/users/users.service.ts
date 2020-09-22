@@ -24,15 +24,15 @@ export class UsersService {
   }
 
   async getByEmailAndThrowIfDontExist(email: string) {
-    const user = this.usersRepository.findOne({ email });
+    const user = await this.usersRepository.findOne({ email });
     if (user) {
       return user;
     }
     throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND);
   }
 
-  getByEmailAndThrowIfExist(email: string) {
-    const user = this.usersRepository.findOne({ email });
+  async getByEmailAndThrowIfExist(email: string) {
+    const user = await this.usersRepository.findOne({ email });
     if (user) {
       throw new HttpException('User with this email already exist', HttpStatus.CONFLICT);
     }

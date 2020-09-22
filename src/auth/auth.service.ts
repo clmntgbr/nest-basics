@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
-    const user = this.usersService.getByEmailAndThrowIfExist(createUserDto.email)
+    const user = await this.usersService.getByEmailAndThrowIfExist(createUserDto.email)
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
     return await this.usersService.create(createUserDto)
   }
