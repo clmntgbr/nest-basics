@@ -7,10 +7,18 @@
 [linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
 [linux-url]: https://travis-ci.org/nestjs/nest
 
-A starter project in NestJS using JWT, Passeport, Helmet, etc...
+A starter project in NestJS using some cool packages :
 
-Gives an API with token gesture and user entity
+TypeORM<br/>
+JWT<br/>
+Passeport<br/>
+Helmet<br/>
+Bcrypt<br/>
+Rate Limit<br/>
+Mysql<br/>
+Config<br/>
 
+<p>Gives an API with token gesture, user entity, security, .env files config, etc ...</p>
 ## License
 
   Nest is [MIT licensed](LICENSE).
