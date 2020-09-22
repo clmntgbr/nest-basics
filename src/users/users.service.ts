@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   async getByEmailAndThrowIfDontExist(email: string) {
-    const user = await this.usersRepository.findOne({ email });
+    const user = this.usersRepository.findOne({ email });
     if (user) {
       return user;
     }
