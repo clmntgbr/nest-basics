@@ -26,6 +26,10 @@ export class User {
     lastName: string;
 
     @Expose()
+    @Column({type: 'datetime', nullable: false, default: () => "CURRENT_TIMESTAMP"})
+    createdAt: Date;
+
+    @Expose()
     @Column({ default: true })
     isActive: boolean;
 
